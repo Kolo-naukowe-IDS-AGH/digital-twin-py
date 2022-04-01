@@ -11,5 +11,5 @@ setup(
     include_package_data=True,
     zip_safe=False,
     license="MIT",
-    install_requires=['requests==2.27.1', 'urllib3==1.26.9'],
+    install_requires=["requests==2.27.1", "urllib3==1.26.9"],
 )
