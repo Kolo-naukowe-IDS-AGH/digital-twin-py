@@ -17,7 +17,11 @@ class HTTPService(ABC):
 
     api_uri: str
 
-    def __init__(self, adapter: HTTPAdapter | None = DEFAULT_HTTP_ADAPTER, caller: str | None = None) -> None:
+    def __init__(
+        self,
+        adapter: HTTPAdapter | None = DEFAULT_HTTP_ADAPTER,
+        caller: str | None = None,
+    ) -> None:
         self.session = Session()
         self.adapter = adapter
         self.caller = caller
@@ -32,25 +36,21 @@ class HTTPService(ABC):
         return self.caller or "unknown"
 
     def get_headers(self) -> dict:
-        return {
-            "Content-Type": "application/json",
-            "X-Caller": self.get_caller()
-        }
+        return {"Content-Type": "application/json", "X-Caller": self.get_caller()}
 
     @abstractmethod
     def get_api_uri(self, path: str) -> str:
         ...
 
     def get(self, path: str) -> Any:
-        return self.session.get(
-            url=self.get_api_uri(path),
-            headers=self.get_headers()
-        )
+        return self.session.get(url=self.get_api_uri(path), headers=self.get_headers())
 
-    def post(self, path: str, data: dict | list | bytes | None = None, json: str | None = None) -> Any:
+    def post(
+        self,
+        path: str,
+        data: dict | list | bytes | None = None,
+        json: str | None = None,
+    ) -> Any:
         return self.session.post(
-            url=self.get_api_uri(path),
-            data=data,
-            json=json,
-            headers=self.get_headers()
+            url=self.get_api_uri(path), data=data, json=json, headers=self.get_headers()
         )

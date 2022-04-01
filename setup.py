@@ -1,4 +1,4 @@
-from setuptools import setup, find_packages
+from setuptools import find_packages, setup
 
 setup(
     name="dt-py",
@@ -10,5 +10,5 @@ setup(
     packages=find_packages(),
     include_package_data=True,
     zip_safe=False,
-    license="MIT"
+    license="MIT",
 )
