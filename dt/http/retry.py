@@ -11,14 +11,14 @@ DEFAULT_STATUS_FORCE_LIST: Iterable[int] = (
     HTTPStatus.GATEWAY_TIMEOUT,
 )
 
-DEFAULT_RETRY_METHOD_WHITE_LIST: Iterable[str] = ("HEAD", "GET", "OPTIONS")
+DEFAULT_RETRY_ALLOWED_METHODS: Iterable[str] = ("HEAD", "GET", "OPTIONS")
 
 DEFAULT_BACKOFF_FACTOR: float = 0.5
 
 DEFAULT_RETRY_STRATEGY: Retry = Retry(
     total=3,
     status_forcelist=DEFAULT_STATUS_FORCE_LIST,
-    method_whitelist=DEFAULT_RETRY_METHOD_WHITE_LIST,
+    allowed_methods=DEFAULT_RETRY_ALLOWED_METHODS,
     backoff_factor=DEFAULT_BACKOFF_FACTOR,
     respect_retry_after_header=True,
 )

@@ -1,8 +1,8 @@
 from abc import ABC, abstractmethod
-from typing import Any
 
-from requests import Session
+from requests import Response, Session
 from requests.adapters import HTTPAdapter
+from requests.auth import AuthBase
 
 from dt.http.adapters import TimeoutHTTPAdapter
 from dt.http.retry import DEFAULT_RETRY_STRATEGY
@@ -14,6 +14,7 @@ class HTTPService(ABC):
     adapter: HTTPAdapter
     session: Session
     caller: str | None
+    auth: AuthBase | None = None
 
     api_uri: str
 
@@ -42,15 +43,54 @@ class HTTPService(ABC):
     def get_api_uri(self, path: str) -> str:
         ...
 
-    def get(self, path: str) -> Any:
-        return self.session.get(url=self.get_api_uri(path), headers=self.get_headers())
+    def get(self, path: str) -> Response:
+        return self.session.get(
+            url=self.get_api_uri(path), auth=self.auth, headers=self.get_headers()
+        )
 
     def post(
         self,
         path: str,
         data: dict | list | bytes | None = None,
-        json: str | None = None,
-    ) -> Any:
+        json: dict | None = None,
+    ) -> Response:
         return self.session.post(
-            url=self.get_api_uri(path), data=data, json=json, headers=self.get_headers()
+            url=self.get_api_uri(path),
+            data=data,
+            json=json,
+            auth=self.auth,
+            headers=self.get_headers(),
+        )
+
+    def put(
+        self,
+        path: str,
+        data: dict | list | bytes | None = None,
+        json: dict | None = None,
+    ) -> Response:
+        return self.session.put(
+            url=self.get_api_uri(path),
+            data=data,
+            json=json,
+            auth=self.auth,
+            headers=self.get_headers(),
+        )
+
+    def patch(
+        self,
+        path: str,
+        data: dict | list | bytes | None = None,
+        json: dict | None = None,
+    ) -> Response:
+        return self.session.patch(
+            url=self.get_api_uri(path),
+            data=data,
+            json=json,
+            auth=self.auth,
+            headers=self.get_headers(),
+        )
+
+    def delete(self, path: str) -> Response:
+        return self.session.delete(
+            url=self.get_api_uri(path), auth=self.auth, headers=self.get_headers()
         )
