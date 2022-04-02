@@ -1,12 +1,12 @@
 FROM python:3.10.2-slim
 
-RUN pip install --upgrade pip setuptools
-
 WORKDIR /usr/src/app
 
 RUN groupadd -r --gid 10001 devs
 RUN useradd -r -g devs -u 20008 user
 RUN chown -R user:devs /usr/src/app
+
+RUN pip install --upgrade pip setuptools
 
 COPY requirements*.txt .
 RUN pip install --upgrade pip
