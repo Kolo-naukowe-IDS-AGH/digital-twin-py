@@ -14,7 +14,7 @@ ENV PATH="/opt/venv/bin:$PATH"
 
 RUN pip install --upgrade pip setuptools
 
-COPY requirements*.txt /
+COPY requirements*.txt ./
 RUN pip install --upgrade pip
 RUN pip install -r requirements-all.txt
 
