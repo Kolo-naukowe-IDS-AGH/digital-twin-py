@@ -44,3 +44,9 @@ pre-commit run --all-files
 ```
 
 Create `feature` branch for your changes and don't forget about bumping package version in `setup.py` file.
+
+### Run tests
+Just use prepared script:
+```
+./scripts/tests.sh
+```
