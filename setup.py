@@ -1,6 +1,6 @@
 from setuptools import find_packages, setup
 
-REQUIRES = ["requests==2.27.1", "urllib3==1.26.9"]
+REQUIRES = ["requests==2.27.1", "urllib3==1.26.9", "fastapi==0.75.1"]
 
 setup(
     name="dt-py",
