@@ -3,7 +3,7 @@ from enum import Enum
 
 from pydantic import BaseModel
 
-from app.db.models import Product
+from dt.schema.products import Product
 
 
 class EventType(str, Enum):

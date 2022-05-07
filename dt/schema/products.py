@@ -2,7 +2,7 @@ from datetime import datetime
 
 from pydantic import BaseModel
 
-from app.schema.events import Event
+from dt.schema.events import Event
 
 
 class ProductBase(BaseModel):
